@@ -5,5 +5,10 @@ namespace ControleEstoque.Domain.Entities
     public abstract class EntidadeBase
     {
         public Guid Id { get; protected set; }
+
+        public void SetId(Guid id)
+        {
+            Id = id;
+        }
     }
 }

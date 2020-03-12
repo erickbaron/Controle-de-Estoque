@@ -3,7 +3,7 @@
     public enum NiveisAcesso
     {
         Administrador = 0,
-        FuncionarioLoja1 = 1,
-        FuncionarioLoja2 = 2
+        UsuarioLoja1 = 1,
+        UsuarioLoja2 = 2
     }
 }
