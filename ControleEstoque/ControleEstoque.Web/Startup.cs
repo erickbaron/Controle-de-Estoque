@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ControleEstoque.Application.Services.Funcionario;
+using ControleEstoque.Domain.Interfaces;
+using ControleEstoque.Infra.Context;
+using ControleEstoque.Infra.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using ControleEstoque.Infra.Context;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
-using ControleEstoque.Domain.Interfaces;
-using ControleEstoque.Application.Services.Funcionario;
-using ControleEstoque.Infra.Repositories;
-using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Globalization;
+using System.Text;
 
 namespace ControleEstoque.Web
 {
@@ -32,7 +25,6 @@ namespace ControleEstoque.Web
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -55,13 +47,12 @@ namespace ControleEstoque.Web
                      };
                  });
 
-            //services.AddMvc(options => options.Filters.Add(typeof(JsonExceptionFilter)))
-            //        .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddDbContext<MainContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("ControleEstoqueConnectionString")));
 
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IEstoqueRepository, EstoqueRepository>();
+            services.AddScoped<IEstoqueService, EstoqueService>();
 
             services.AddCors(options =>
             {
@@ -78,7 +69,6 @@ namespace ControleEstoque.Web
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -87,7 +77,6 @@ namespace ControleEstoque.Web
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
