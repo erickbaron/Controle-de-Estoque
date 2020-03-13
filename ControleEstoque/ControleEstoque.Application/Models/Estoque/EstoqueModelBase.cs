@@ -10,6 +10,7 @@ namespace ControleEstoque.Application.Models.Estoque
         public decimal ValorCompra { get; set; }
         public decimal ValorVenda { get; set; }
         public decimal PercentualVenda { get; set; }
+        public int QuantidadeEmEstoque { get; set; }
         public Loja Loja { get; set; }
     }
 }

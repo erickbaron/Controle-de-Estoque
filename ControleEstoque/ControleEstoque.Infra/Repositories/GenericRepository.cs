@@ -3,6 +3,7 @@ using ControleEstoque.Domain.Interfaces;
 using ControleEstoque.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,9 +31,9 @@ namespace ControleEstoque.Infra.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<TEntity> GetAll()
+        public async Task<IList<TEntity>> GetAll()
         {
-            return _dbContext.Set<TEntity>().AsNoTracking();
+            return await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
         public async Task<TEntity> GetById(Guid id)
