@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControleEstoque.Domain.Utils;
+using System;
 
 namespace ControleEstoque.Application.Models.Funcionario
 {
@@ -10,5 +11,6 @@ namespace ControleEstoque.Application.Models.Funcionario
         public string Senha { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime DataNascimento { get; set; }
+        public int NiveisAcesso { get; set; }
     }
 }
