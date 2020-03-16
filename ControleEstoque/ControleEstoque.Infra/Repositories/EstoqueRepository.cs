@@ -1,6 +1,5 @@
 ﻿using ControleEstoque.Domain.Entities;
 using ControleEstoque.Domain.Interfaces;
-using ControleEstoque.Domain.Utils;
 using ControleEstoque.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -14,7 +13,7 @@ namespace ControleEstoque.Infra.Repositories
         public EstoqueRepository(MainContext dbContext) : base(dbContext)
         {
         }
-        public async Task<IList<Estoque>> GetByLoja(Loja loja)
+        public async Task<IList<Estoque>> GetByLoja(int loja)
         {
             return await _dbContext.Set<Estoque>()
                 .Where(e => e.Loja == loja).ToListAsync();

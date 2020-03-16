@@ -10,7 +10,7 @@ namespace ControleEstoque.Application.Services.Funcionario
     {
         Task Create(EstoqueRequestModel request);
         Task<IList<EstoqueResponseModel>> GetAll();
-        Task<IList<EstoqueResponseModel>> GetAllByLoja(Loja loja);
+        Task<IList<EstoqueResponseModel>> GetAllByLoja(int loja);
         Task<EstoqueResponseModel> GetById(Guid id);
         Task Update(Guid id, EstoqueRequestModel request);
         Task Delete(Guid id);

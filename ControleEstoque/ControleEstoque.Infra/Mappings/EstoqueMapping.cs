@@ -27,10 +27,10 @@ namespace ControleEstoque.Infra.Mappings
         {
             var estoques = new List<Estoque>();
 
-            var estoqueAncora = new Estoque(Loja.AncoraStore, "UC200", "Faca", "Uma bela faca", (decimal)20.00, (decimal)50.00, (decimal)250.00, 50);
+            var estoqueAncora = new Estoque((int)Loja.AncoraStore, "UC200", "Faca", "Uma bela faca", (decimal)20.00, (decimal)50.00, (decimal)250.00, 50);
             estoqueAncora.SetId(Guid.NewGuid());
 
-            var estoqueUniverso = new Estoque(Loja.UniversoDeeles, "UC200", "Faca 2.0", "Uma bela faca 2.0", (decimal)20.00, (decimal)50.00, (decimal)250.00, 50);
+            var estoqueUniverso = new Estoque((int)Loja.UniversoDeeles, "UC200", "Faca 2.0", "Uma bela faca 2.0", (decimal)20.00, (decimal)50.00, (decimal)250.00, 50);
             estoqueUniverso.SetId(Guid.NewGuid());
 
             estoques.Add(estoqueAncora);

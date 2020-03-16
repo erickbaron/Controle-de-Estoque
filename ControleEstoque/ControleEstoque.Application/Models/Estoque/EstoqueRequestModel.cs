@@ -2,5 +2,6 @@
 {
     public class EstoqueRequestModel : EstoqueModelBase
     {
+        public int Loja { get; set; }
     }
 }

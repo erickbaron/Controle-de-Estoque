@@ -2,6 +2,7 @@
 using ControleEstoque.Domain.Entities;
 using ControleEstoque.Domain.Interfaces;
 using ControleEstoque.Domain.Utils;
+using ParkingLot.Domain.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace ControleEstoque.Application.Services.Funcionario
                 request.Codigo,
                 request.Nome,
                 request.Descricao,
-                request.ValorCompra,
+                request.ValorCusto,
                 request.ValorVenda,
                 request.PercentualVenda,
                 request.QuantidadeEmEstoque
@@ -52,8 +53,8 @@ namespace ControleEstoque.Application.Services.Funcionario
                 Codigo = x.Codigo,
                 Nome = x.Nome,
                 Descricao = x.Descricao,
-                Loja = x.Loja,
-                ValorCompra = x.ValorCusto,
+                Loja = x.Loja.ToString(),
+                ValorCusto = x.ValorCusto,
                 ValorVenda = x.ValorVenda,
                 PercentualVenda = x.PercentualVenda,
                 QuantidadeEmEstoque = x.QuantidadeEmEstoque
@@ -72,25 +73,15 @@ namespace ControleEstoque.Application.Services.Funcionario
                 Codigo = estoque.Codigo,
                 Nome = estoque.Nome,
                 Descricao = estoque.Descricao,
-                Loja = estoque.Loja,
-                ValorCompra = estoque.ValorCusto,
+                Loja = EnumUtils.GetDescriptionByCode<Estoque>(estoque.Loja),
+                ValorCusto = estoque.ValorCusto,
                 ValorVenda = estoque.ValorVenda,
                 PercentualVenda = estoque.PercentualVenda,
                 QuantidadeEmEstoque = estoque.QuantidadeEmEstoque
             };
         }
-
-        public async Task Update(Guid id, EstoqueRequestModel request)
-        {
-            var estoque = await _estoqueRepository.GetById(id);
-            if (estoque == null)
-                throw new Exception("Não foi possível encontrar esse estoque");
-
-            estoque.Update(request.Loja, request.Codigo, request.Nome, request.Descricao, request.ValorVenda, request.ValorVenda, request.PercentualVenda, request.QuantidadeEmEstoque);
-            await _estoqueRepository.Update(id, estoque);
-        }
-
-        public async Task<IList<EstoqueResponseModel>> GetAllByLoja(Loja loja)
+        
+        public async Task<IList<EstoqueResponseModel>> GetAllByLoja(int loja)
         {
             var estoques = await _estoqueRepository.GetByLoja(loja);
             if (estoques.Count < 1)
@@ -101,12 +92,22 @@ namespace ControleEstoque.Application.Services.Funcionario
                 Codigo = x.Codigo,
                 Nome = x.Nome,
                 Descricao = x.Descricao,
-                Loja = x.Loja,
-                ValorCompra = x.ValorCusto,
+                Loja = EnumUtils.GetDescriptionByCode<Estoque>(x.Loja),
+                ValorCusto = x.ValorCusto,
                 ValorVenda = x.ValorVenda,
                 PercentualVenda = x.PercentualVenda,
                 QuantidadeEmEstoque = x.QuantidadeEmEstoque
             }).ToList();
+        }
+
+        public async Task Update(Guid id, EstoqueRequestModel request)
+        {
+            var estoque = await _estoqueRepository.GetById(id);
+            if (estoque == null)
+                throw new Exception("Não foi possível encontrar esse estoque");
+
+            estoque.Update(request.Loja, request.Codigo, request.Nome, request.Descricao, request.ValorVenda, request.ValorVenda, request.PercentualVenda, request.QuantidadeEmEstoque);
+            await _estoqueRepository.Update(id, estoque);
         }
     }
 }
