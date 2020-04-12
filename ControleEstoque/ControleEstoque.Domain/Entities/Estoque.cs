@@ -1,33 +1,31 @@
-﻿using ControleEstoque.Domain.Utils;
-
-namespace ControleEstoque.Domain.Entities
+﻿namespace ControleEstoque.Domain.Entities
 {
     public class Estoque : EntidadeBase
     {
-        public Estoque(Loja loja, string codigo, string nome, string descricao, decimal valorDeCusto, decimal valorDeVenda, decimal percentualVenda, int quantidadeEmEstoque)
+        public Estoque(int loja, string codigo, string nome, string descricao, decimal valorCusto, decimal valorVenda, decimal percentualVenda, int quantidadeEmEstoque)
         {
             Loja = loja;
             Codigo = codigo;
             Nome = nome;
             Descricao = descricao;
-            ValorCusto = valorDeCusto;
-            ValorVenda = valorDeVenda;
+            ValorCusto = valorCusto;
+            ValorVenda = valorVenda;
             PercentualVenda = percentualVenda;
             QuantidadeEmEstoque = quantidadeEmEstoque;
         }
-        public void Update(Loja loja, string codigo, string nome, string descricao, decimal valorDeCusto, decimal valorDeVenda, decimal percentualVenda, int quantidadeEmEstoque)
+        public void Update(int loja, string codigo, string nome, string descricao, decimal valorCusto, decimal valorVenda, decimal percentualVenda, int quantidadeEmEstoque)
         {
             Loja = loja;
             Codigo = codigo;
             Nome = nome;
             Descricao = descricao;
-            ValorCusto = valorDeCusto;
-            ValorVenda = valorDeVenda;
+            ValorCusto = valorCusto;
+            ValorVenda = valorVenda;
             PercentualVenda = percentualVenda;
             QuantidadeEmEstoque = quantidadeEmEstoque;
         }
 
-        public Loja Loja { get; protected set; }
+        public int Loja { get; protected set; }
         public string Codigo { get; protected set; }
         public string Nome { get; protected set; }
         public string Descricao { get; protected set; }

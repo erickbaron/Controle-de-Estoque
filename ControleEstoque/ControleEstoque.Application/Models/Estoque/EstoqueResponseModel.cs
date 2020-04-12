@@ -2,5 +2,6 @@
 {
     public class EstoqueResponseModel : EstoqueModelBase
     {
+        public string Loja { get; set; }
     }
 }
